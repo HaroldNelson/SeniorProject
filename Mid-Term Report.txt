@@ -1,0 +1,10 @@
+The purpose of this project is to help our client Dr. Chen, teach his upcoming class on parallel programming.
+We are doing this by creating a cluster of raspberry pi's that are connected and communicating.
+With this setup, along with a server containing our website and several sub-pages, students will be able to learn 
+parallel programming through lab excersizes that we will also design, but later in the second semester.
+
+For the first half of this project (The first semester), with the guidance of Dr. Chen, we have decided to try and finish the website and get the server/cluster communicating.
+The website is complete and has been uploaded in a prior github submission. We are in the works of setting up each individual raspbery pi and playing with the configuration settings.
+
+I would say the biggest struggle for our team is that we can not meet very often. However, with the few meetings we have had, they have been very beneficial. With that said,
+we are ahead of schedule and I look forward to the completion of our project and the satisfaction of our client.
