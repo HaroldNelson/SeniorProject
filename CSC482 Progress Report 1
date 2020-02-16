@@ -1,0 +1,19 @@
+Progress Report 1
+
+
+
+2.16.2020
+
+
+
+1. Briefly describe your project. (About 2 sentences.)
+Sanju and I have started this senior project together to build a multi-purpose Raspberry Pi Cluster Webserver to deploy an educaitonal website for client to teach C programming and Parallel Computing with MPI and OpenMP.
+
+2. What is your particular role in the project?
+My role is software engineer. I develop the website that is loaded onto the Pi's. I also come up with the content that is to be put on the website for the parallel programming class.
+
+3. What have you done personally in the two weeks leading up to today?
+In the last two weeks, I have spent a lot of time researching C programming using a book that Dr. Chen loaned us. I also used internet resources and techniques learned in my classes to help me develop a website that is easily navigatable and looks nice.
+
+4. Describe any significant progress made by the team as a whole in this time period.
+Recently, Sanju has completed implementing VPN and VNC and I have completed the format for how each subpage will look when we apply content to them.
