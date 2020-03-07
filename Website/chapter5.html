@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 5 - Introduction to OpenMP </h2></font>
+			<center><p>
+OpenMP (Open Multi-Processing) is an Application Program Interface (API) that may be used to explicitly direct multi-threaded, shared memory parallelism. OpenMP is comprised of three primary API components, compiler directives, runtime library routines, and environment variables.
+
+<p>In the early 90's, vendors of shared-memory machines supplied similar, directive-based, Fortran programming extensions: 
+	The user would augment a serial Fortran program with directives specifying which loops were to 	be parallelized 
+	The compiler would be responsible for automatically parallelizing such loops across the SMP 	processors 
+<p>Implementations were all functionally similar, but were diverging (as usual) 
+First attempt at a standard was the draft for ANSI X3H5 in 1994. It was never adopted, largely due to waning interest as distributed memory machines became popular. 
+However, not long after this, newer shared memory machine architectures started to become prevalent, and interest resumed. 
+The OpenMP standard specification started in the spring of 1997, taking over where ANSI X3H5 had left off.
+OpenMP is designed for multi-processor/core, shared memory machines. The underlying architecture can be shared memory UMA or NUMA.
+ 
+<p>Because OpenMP is designed for shared memory parallel programming, it largely limited to single node parallelism. Typically, the number of processing elements (cores) on a node determine how much parallelism can be implemented.
+
+<p><p>Thread-Based Parallelism:
+<p>OpenMP programs accomplish parallelism exclusively through the use of threads. 
+A thread of execution is the smallest unit of processing that can be scheduled by an operating system. The idea of a subroutine that can be scheduled to run autonomously might help explain what a thread is. 
+Threads exist within the resources of a single process. Without the process, they cease to exist. 
+Typically, the number of threads match the number of machine processors/cores. However, the actual use of threads is up to the application.
+
+<p><p>Explicit Parallelism:
+<p>OpenMP is an explicit (not automatic) programming model, offering the programmer full control over parallelization. 
+Parallelization can be as simple as taking a serial program and inserting compiler directives.... 
+Or as complex as inserting subroutines to set multiple levels of parallelism, locks and even nested locks.
+
+<p><p>Fork – Join Model:
+<p>OpenMP uses the fork-join model of parallel execution: 
+ 
+<p>All OpenMP programs begin as a single process: the master thread. The master thread executes sequentially until the first parallel region construct is encountered. 
+FORK: the master thread then creates a team of parallel threads. 
+The statements in the program that are enclosed by the parallel region construct are then executed in parallel among the various team threads. 
+JOIN: When the team threads complete the statements in the parallel region construct, they synchronize and terminate, leaving only the master thread. 
+The number of parallel regions and the threads that comprise them are arbitrary.
+
+<p>Data Scoping:
+Because OpenMP is a shared memory programming model, most data within a parallel region is shared by default. 
+All threads in a parallel region can access this shared data simultaneously. 
+OpenMP provides a way for the programmer to explicitly specify how data is "scoped" if the default shared scoping is not desired.
+
+<p>As mentioned previously, OpenMP is comprised of three primary API components, compiler directives, runtime library routines, and environment variables. The application developer decides how to employ these components. In the simplest case, only a few of them are needed. Implementations differ in their support of all API components. For example, an implementation may state that it supports nested parallelism, but the API makes it clear that may be limited to a single thread - the master thread. Not exactly what the developer might expect?
 
 
-</body>
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
+
+
+   </body>
 </html>

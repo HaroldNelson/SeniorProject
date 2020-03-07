@@ -1,10 +1,184 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 6 - OpenMP Directives </h2></font>
+			<center><p>
+<p>Compiler directives appear as comments in your source code and are ignored by compilers unless you tell them otherwise - usually by specifying the appropriate compiler flag, as discussed in the Compiling section later. 
+<p>OpenMP compiler directives are used for various purposes: 
+	Spawning a parallel region 
+	Dividing blocks of code among threads 
+	Distributing loop iterations between threads 
+	Serializing sections of code 
+	Synchronization of work among threads 
+<p>Compiler directives have the following syntax: 
+sentinel       directive-name      [clause, ...]
+For example (C/C++):
+#pragma omp parallel default(shared) private(beta,pi)
+
+<p>The parallel directive
+This directive defines a parallel region, which is code that will be executed by multiple threads in parallel. The following is an example of the parallel directive in C++:
+// omp_parallel.cpp
+// compile with: /openmp
+#include <stdio.h>
+#include <omp.h>
+
+<p>int main() {
+   #pragma omp parallel num_threads(4)
+   {
+      int i = omp_get_thread_num();
+      printf_s("Hello from thread %d\n", i);
+   }
+}
+<p>This is the output from the code above:
+<p>Hello from thread 0
+<p>Hello from thread 1
+<p>Hello from thread 2
+<p>Hello from thread 3
+
+<p>For Directive
+<p>This directive causes the work done in a for loop inside a parallel region to be divided among threads. This is what the directive might look like in C++:
+#pragma omp [parallel] for [clauses]
+   for_statement
+<p>If parallel is also specified, clauses can be any clause accepted by the parallel or for directives, except nowait.
+
+<p><p>Sections Directive
+<p>This directive identifies code sections to be divided among all threads. For example, this directive in C++ might look like this:
+// omp_sections.cpp
+// compile with: /openmp
+#include <stdio.h>
+#include <omp.h>
+
+int main() {
+    #pragma omp parallel sections num_threads(4)
+    {
+        printf_s("Hello from thread %d\n", omp_get_thread_num());
+        #pragma omp section
+        printf_s("Hello from thread %d\n", omp_get_thread_num());
+    }
+}
+<p><p>The output for the code above would be the following:
+<p>Hello from thread 0
+<p>Hello from thread 0
+
+<p>Parallel For Directive
+<p>This directive is a combination of the parallel directive and the for directive. Below is example code, demonstrating this directive:
+ #include <omp.h>
+ #define N       1000
+ #define CHUNKSIZE   100
+
+ main(int argc, char *argv[]) {
+
+ int i, chunk;
+ float a[N], b[N], c[N];
+
+ /* Some initializations */
+ for (i=0; i < N; i++)
+   a[i] = b[i] = i * 1.0;
+ chunk = CHUNKSIZE;
+
+ #pragma omp parallel for \
+   shared(a,b,c,chunk) private(i) \
+   schedule(static,chunk)
+   for (i=0; i < N; i++)
+     c[i] = a[i] + b[i];
+ }
+
+<p>Parallel Sections Directive
+<p>The parallel sections directive provides a shortcut form for specifying a parallel region that has only a single sections directive. The semantics are the same as explicitly specifying a parallel directive immediately followed by a sections directive. The syntax of the parallel sections directive is as follows:
+#pragma omp parallel sections  [clause[[,] clause] ...] new-line
+   {
+   [#pragma omp section new-line]
+      structured-block
+   [#pragma omp section new-linestructured-block  ]
+   ...
+}
 
 
-</body>
+<p><p>Environment Variables: 
+<p>OpenMP provides several environment variables for controlling the execution of parallel code at run-time. These environment variables can be used to control such things as: 
+	Setting the number of threads 
+	Specifying how loop iterations are divided 
+	Binding threads to processors 
+	Enabling/disabling nested parallelism; setting the maximum levels of nested parallelism 
+	Enabling/disabling dynamic threads 
+	Setting thread stack size 
+	Setting thread wait policy 
+<p>Setting OpenMP environment variables is done the same way you set any other environment variables and depends upon which shell you use. For example: 
+csh/tcsh
+setenv OMP_NUM_THREADS 8
+sh/bash
+export OMP_NUM_THREADS=8
+
+<p>Below is an example of OpenMP code structure in (C/C++):
+#include <omp.h>
+   main ()  {
+   int var1, var2, var3;
+   Serial code 
+         .
+         .
+         .
+   Beginning of parallel region. Fork a team of threads.
+   Specify variable scoping 
+   #pragma omp parallel private(var1, var2) shared(var3)
+      {
+      Parallel region executed by all threads 
+                 .
+      Other OpenMP directives
+                 .
+      Run-time Library calls
+                 .
+      All threads join master thread and disband 
+      }  
+   Resume serial code 
+         .
+         .
+         .
+   }
+
+
+<p>C/C++ Directives Format
+ 
+<p>Example: #pragma omp parallel default(shared) private(beta,pi)
+
+<p>These are the general rules:
+<p>Case sensitive 
+<p>Directives follow conventions of the C/C++ standards for compiler directives 
+<p>Only one directive-name may be specified per directive 
+<p>Each directive applies to at most one succeeding statement, which must be a structured block. 
+<p>Long directive lines can be "continued" on succeeding lines by escaping the newline character with a backslash ("\") at the end of a directive line.
+
+<p>(https://docs.microsoft.com/en-us/cpp/parallel/openmp/reference/openmp-directives?view=vs-2019#sections-openmp)
+
+
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
+
+
+   </body>
 </html>

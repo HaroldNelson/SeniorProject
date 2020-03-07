@@ -1,10 +1,102 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 10 - MPI Functions </h2></font>
+			<center><p>
+<p>MPI_Get_version()
+<p>This function returns the version number of MPI.
+int MPI_Get_version(
+  int *version,
+  int *subversion
+);
+
+<p>MPI_Get_processor_name()
+<p>This function gets the name of the processor. The name returned should identify a particular piece of hardware; the exact format is implementation defined. This name may or may not be the same as might be returned by gethostname, uname, or sysinfo.
+int MPI_Get_processor_name(
+  char *name,
+  int *resultlen
+);
+
+int MPI_Get_processor_name(
+  wchar_t *name,
+  int *resultlen
+);
+
+<p>MPI_Sendrecv()
+<p>This function sends and receives a message.
+int MPI_Sendrecv(
+  void *sendbuf,
+  int sendcount,
+  MPI_Datatype sendtype,
+  int dest,
+  int sendtag,
+  void *recvbuf,
+  int recvcount,
+  MPI_Datatype recvtype,
+  int source,
+  int recvtag,
+  MPI_Comm comm,
+  MPI_Status *status
+);
+<p>Parameters
+<p>sendbuf 
+<p>[in] initial address of send buffer (choice) 
+<p>sendcount 
+<p>	[in] number of elements in send buffer (integer) 
+<p>sendtype 
+<p>	[in] type of elements in send buffer (handle) 
+<p>dest 
+<p>	[in] rank of destination (integer) 
+<p>sendtag 
+<p>	[in] send tag (integer) 
+<p>recvbuf 
+<p>	[out] initial address of receive buffer (choice) 
+<p>recvcount 
+<p>	[in] number of elements in receive buffer (integer) 
+<p>recvtype 
+<p>	[in] type of elements in receive buffer (handle) 
+<p>source 
+<p>	[in] rank of source (integer) 
+<p>recvtag 
+<p>	[in] receive tag (integer) 
+<p>comm 
+<p>	[in] communicator (handle) 
+<p>status 
+<p>	[out] status object (Status). This refers to the receive operation.
 
 
-</body>
+<p>(https://computing.llnl.gov/tutorials/mpi/)
+
+
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
+
+
+   </body>
 </html>

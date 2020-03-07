@@ -1,10 +1,153 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 9 - Introduction to MPI </h2></font>
+			<center><p>
+<p>The Message Passing Interface Standard (MPI) is a message passing library standard based on the consensus of the MPI Forum, which has over 40 participating organizations, including vendors, researchers, software library developers, and users. The goal of the Message Passing Interface is to establish a portable, efficient, and flexible standard for message passing that will be widely used for writing message passing programs. As such, MPI is the first standardized, vendor independent, message passing library. The advantages of developing message passing software using MPI closely match the design goals of portability, efficiency, and flexibility. MPI is not an IEEE or ISO standard, but has in fact, become the "industry standard" for writing message passing programs on HPC platforms.
+MPI is a specification for the developers and users of message passing libraries. By itself, it is NOT a library - but rather the specification of what such a library should be. 
+MPI primarily addresses the message-passing parallel programming model: data is moved from the address space of one process to that of another process through cooperative operations on each process. 
+Simply stated, the goal of the Message Passing Interface is to provide a widely used standard for writing message passing programs. The interface attempts to be practical, portable, efficient, and flexible.
+The MPI standard has gone through a number of revisions, with the most recent version being MPI-3.x  
+Actual MPI library implementations differ in which version and features of the MPI standard they support.
+
+<p>Programming Model: 
+<p>Originally, MPI was designed for distributed memory architectures, which were becoming increasingly popular at that time (1980s - early 1990s). 
+ 
+<p>As architecture trends changed, shared memory SMPs were combined over networks creating hybrid distributed memory / shared memory systems. 
+<p>MPI implementors adapted their libraries to handle both types of underlying memory architectures seamlessly. They also adapted/developed ways of handling different interconnects and protocols. 
+ 
+<p>Today, MPI runs on virtually any hardware platform: 
+Distributed Memory 
+Shared Memory 
+Hybrid 
+The programming model clearly remains a distributed memory model however, regardless of the underlying physical architecture of the machine. 
+All parallelism is explicit: the programmer is responsible for correctly identifying parallelism and implementing parallel algorithms using MPI constructs. 
+
+<p>Reasons for Using MPI: 
+<p>Standardization - MPI is the only message passing library that can be considered a standard. It is supported on virtually all HPC platforms. Practically, it has replaced all previous message passing libraries.
+<p>Portability - There is little or no need to modify your source code when you port your application to a different platform that supports (and is compliant with) the MPI standard. 
+<p>Performance Opportunities - Vendor implementations should be able to exploit native hardware features to optimize performance. Any implementation is free to develop optimized algorithms. 
+<p>Functionality - There are over 430 routines defined in MPI-3, which includes the majority of those in MPI-2 and MPI-1. 
+<p>Availability - A variety of implementations are available, both vendor and public domain. 
 
 
-</body>
+<p>MPI Functions
+
+<p>MPI_Init()
+<p>This function is used to initialize the MPI execution environment. This routine must be called before any other MPI routine. It must be called at most once; subsequent calls are erroneous. For example:
+int MPI_Init(
+  int *argc,
+  char ***argv
+);
+int MPI_Init(
+  int *argc,
+  wchar_t ***argv
+);
+
+<p>MPI_Finalize()
+<p>This function terminates the MPI execution environment.
+int MPI_Finalize( void );
+This routine cleans up all MPI state. Once this routine is called, no MPI routine (even MPI_INIT) may be called. The user must ensure that all pending communications involving a process completes before the process calls MPI_FINALIZE. 
+All processes must call this routine before exiting. The number of processes running after this routine is called is undefined; it is best not to perform much more than a return rc after calling MPI_Finalize.
+
+<p>MPI_Comm_size()
+<p>This function determines the size of the group associated with a communicator.
+int MPI_Comm_size(
+  MPI_Comm comm,
+  int *size
+);
+
+<p>MPI_Comm_rank()
+<p>This function indicates the rank of the process that calls it in the range from  size-1, where size is the return value of MPI_COMM_SIZE.
+int MPI_Comm_rank(
+  MPI_Comm comm,
+  int *rank
+);
+
+<p>MPI_Send()
+<p>This function performs a blocking send. It may block until the message is received by the destination process.
+int MPI_Send(
+  void *buf,
+  int count,
+  MPI_Datatype datatype,
+  int dest,
+  int tag,
+  MPI_Comm comm
+);
+<p>Parameters:
+<p>buf 
+<p>	[in] initial address of send buffer (choice) 
+<p>count 
+<p>	[in] number of elements in send buffer (nonnegative integer) 
+<p>datatype 
+<p>	[in] datatype of each send buffer element (handle) 
+<p>dest 
+<p>	[in] rank of destination (integer) 
+<p>tag 
+<p>	[in] message tag (integer) 
+<p>comm 
+<p>	[in] communicator (handle) 
+
+<p>MPI_Recv()
+<p>This function performs a blocking receive for a message. The receive buffer consists of the storage containing count consecutive elements of the type specified by datatype, starting at address buf. The length of the received message must be less than or equal to the length of the receive buffer. An overflow error occurs if all incoming data does not fit, without truncation, into the receive buffer.
+int MPI_Recv(
+  void *buf,
+  int count,
+  MPI_Datatype datatype,
+  int source,
+  int tag,
+  MPI_Comm comm,
+  MPI_Status *status
+);
+<p>Parameters
+<p>buf 
+<p>	[out] initial address of receive buffer (choice) 
+<p>count 
+<p>	[in] maximum number of elements in receive buffer (integer) 
+<p>datatype 
+<p>	[in] datatype of each receive buffer element (handle) 
+<p>source 
+<p>	[in] rank of source (integer) 
+<p>tag 
+<p>	[in] message tag (integer) 
+<p>comm 
+<p>	[in] communicator (handle) 
+<p>status 
+<p>	[out] status object (Status)
+
+
+<p>(https://computing.llnl.gov/tutorials/mpi/)
+
+
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
+
+
+   </body>
 </html>

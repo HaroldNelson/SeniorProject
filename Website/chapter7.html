@@ -1,10 +1,97 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 7 - OpenMP Clauses </h2></font>
+			<center><p>
+<p>Directive Clauses
+<p>The table below summarizes which clauses are accepted by which OpenMP directives:
+ 
+<p><p>The following OpenMP directives do not accept clauses: 
+<p>MASTER 
+<p>CRITICAL 
+<p>BARRIER 
+<p>ATOMIC 
+<p>FLUSH 
+<p>ORDERED 
+<p>THREADPRIVATE
+
+<p><p>Data Scope Attribute Clauses are used in conjunction with several directives (PARALLEL, DO/for, and SECTIONS) to control the scoping of enclosed variables. 
+These constructs provide the ability to control the data environment during execution of parallel constructs. 
+They define how and which data variables in the serial section of the program are transferred to the parallel regions of the program (and back) 
+They define which variables will be visible to all threads in the parallel regions and which variables will be privately allocated to all threads.
+for and its clause: private, shared, reduction
+The IF clause simply specifies whether a loop should be executed in parallel or in serial.
+
+<p><p>The PRIVATE clause declares variables in its list to be private to each thread.
+<p>PRIVATE variables behave as follows: 
+	A new object of the same type is declared once for each thread in the team 
+	All references to the original object are replaced with references to the new object 
+	Should be assumed to be uninitialized for each thread
+
+<p>The SHARED clause declares variables in its list to be shared among all threads in the team.
+A shared variable exists in only one memory location and all threads can read or write to that address 
+It is the programmer's responsibility to ensure that multiple threads properly access SHARED variables (such as via CRITICAL sections)
+
+<p>The DEFAULT clause allows the user to specify a default scope for all variables in the lexical extent of any parallel region.
+Specific variables can be exempted from the default using the PRIVATE, SHARED, FIRSTPRIVATE, LASTPRIVATE, and REDUCTION clauses 
+The C/C++ OpenMP specification does not include private or firstprivate as a possible default. However, actual implementations may provide this option. 
+Using NONE as a default requires that the programmer explicitly scope all variables.
+
+<p>The REDUCTION clause performs a reduction operation on the variables that appear in its list. 
+A private copy for each list variable is created and initialized for each thread. At the end of the reduction, the reduction variable is applied to all private copies of the shared variable, and the final result is written to the global shared variable.
+ 
+
+<p>A parallel region has at least one barrier, at its end, and may have additional barriers within it. At each barrier, the other members of the team must wait for the last thread to arrive. To minimize this wait time, shared work should be distributed so that all threads arrive at the barrier at about the same time. If some of that shared work is contained in for constructs, the SCHEDULE clause can be used for this purpose.
+<p>The code below demonstrates the SCHEDULE clause:
+<p>#pragma omp parallel for schedule(dynamic)
+  for(i=0; i<n; i++) {
+    unpredictable_amount_of_work(i);
+}
+
+<p>The ORDERED clause is required on a parallel for statement if an ordered directive is to be used in the loop. The following code demonstrates the ORDERED clause:
+#pragma omp parallel for private(myval) ordered
+{
+   for(i=1; i<=n; i++){
+      myval = do_lots_of_work(i);
+      #pragma omp ordered
+      {
+         printf("%d %d\n", i, myval);
+      }
+   }
+}
 
 
-</body>
+<p>(https://computing.llnl.gov/tutorials/openMP/#Introduction)
+
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
+
+
+   </body>
 </html>

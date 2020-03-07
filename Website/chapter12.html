@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 12 - MPI Collective Communication Part 2 </h2></font>
+			<center><p>
+<p>MPI_Gather
+<p>If comm is an intracommunicator, each process (root process included) sends the contents of its send buﬀer to the root process. The root process receives the messages and stores them in rank order.
+ 
+
+<p><p>MPI_Allgather
+<p>MPI_ALLGATHER can be thought of as MPI_GATHER, but where all processes receive the result, instead of just the root. The block of data sent from the j-th process is received by every process and placed in the j-th block of the buﬀer recvbuf. The type signature associated with sendcount, sendtype, at a process must be equal to the type signature associated with recvcount, recvtype at any other process.
+ 
+
+<p><p>MPI_Reduce_scatter
+<p>MPI_REDUCE_SCATTER extends the functionality of MPI_REDUCE_SCATTER_BLOCK such that the scattered blocks can vary in size. Block sizes are determined by the recvcounts array, such that the i-th block contains recvcounts[i] elements.
+ 
+<p>If comm is an intracommunicator, MPI_REDUCE_SCATTER ﬁrst performs a global, element-wise reduction on vectors of count =Pn−1 i=0 recvcounts[i] elements in the send buﬀers deﬁned by sendbuf, count and datatype, using the operation op, where n is the number of processes in the group of comm. The routine is called by all group members using the same arguments for recvcounts, datatype, op and comm. The resulting vector is treated as n consecutive blocks where the number of elements of the i-th block is recvcounts[i]. The blocks are scattered to the processes of the group. The i-th block is sent to process i and stored in the receive buﬀer deﬁned by recvbuf, recvcounts[i] and datatype.
+
+<p><p>MPI_Alltoall
+<p>MPI_ALLTOALL is an extension of MPI_ALLGATHER to the case where each process sends distinct data to each of the receivers. The j-th block sent from process i is received by process j and is placed in the i-th block of recvbuf. The type signature associated with sendcount, sendtype, at a process must be equal to the type signature associated with recvcount, recvtype at any other process. This implies that the amount of data sent must be equal to the amount of data received, pairwise between every pair of processes. As usual, however, the type maps may be diﬀerent.
+ 
+
+<p><p>MPI_Scan
+<p>If comm is an intracommunicator, MPI_SCAN is used to perform a preﬁx reduction on data distributed across the group. The operation returns, in the receive buﬀer of the process with rank i, the reduction of the values in the send buﬀers of processes with ranks 0,...,i (inclusive). The routine is called by all group members using the same arguments for count, datatype, op and comm, except that for user-deﬁned operations, the same rules apply as for MPI_REDUCE. The type of operations supported, their semantics, and the constraints on send and receive buﬀers are as for MPI_REDUCE.
+ 
+
+<p>(https://www.mpi-forum.org/docs/mpi-3.0/mpi30-report.pdf) 
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
 
 
-</body>
+   </body>
 </html>

@@ -1,10 +1,254 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title></title>
-</head>
-<body>
+   <head>
+   <style type="text/css" media="all">
+
+	body{background: #466368;
+		background: -webkit-linear-gradient(#999999, #990000);
+		background:    -moz-linear-gradient(#999999, #990000);
+		background:         linear-gradient(#999999, #990000);}
+	img{}
+	h2{ color:white; font-size:30px; text-align:center;}
+	ol{ color:white; font-family:Times New Roman; font-style:normal; font-size:20pt; }
+	table{ color:white; font-family:Arial; font-style:normal; font-size:13pt }
+	p{ color:white; text-align:left;}
+	a{color:white;}
+	
+	
+	</style>
+      <title>    Intro to Parallel Programming       </title>
+   </head>
+   <body><meta name = "keywords" content = "computer, science, intro, 100, CSC, HTML">
+   			<div id="image" style="display:inline;">
+			<center><img style="height:147px; width:486px" src="StMartinlogoTP.png"/>
+			</div>
+			
+			<h2>  Welcome to Parallel Programming Class! </h2>
+			<h2>  Chapter 2 - Programming with C </h2></font>
+			<center><p>
+			Some advantages of learning C programming:
+<p>Easy to learn
+Structured Language
+It produces efficient programs
+It can handle low-level activities
+It can be compiled on a variety of computer platforms.
+
+<p>Facts about C:
+C was invented to write an operating system called UNIX.
+C is the successor of the language B, which was created in the early 1970’s.
+C was formalized in 1988 by the American National Standard Institute (ANSI).
+Today, C is the most widely used and popular System Programming Language.
+Most of the state-of-the-art software have been implemented using C.
+
+<p>C was initially used for system development work, particularly the programs that make-up the operating system. C was adopted as a system development language because it produces code that runs nearly as fast as the code written in assembly language. Some examples of the use of C are Operating systems, language compilers, assemblers, text editors, print spoolers, network drivers, modern programs, databases, and language interpreters.
+
+<p>Setting up your environment:
+To begin cording in C, you will need two things:
+A text editor.
+This is what you will use to type your program. A few examples are Windows Notepad, OS Edit command, Brief, Epsiolon, EMACS, and vim or vi. The files you create with the text editor are called your source files and they contain the program you wrote. The source files for C programs are usually named with the extension “.c”.
+The C Compiler.
+<p>Simply put, the source code you write is meant to be read by humans. A compiler is then used to translate what you wrote into machine language so the CPU can execute the program. A compiler compiles source code into final executable programs. The most frequently used compilers are the SNU C/C++ compiler.
+
+<p>Data Types
+
+<p>Data types in C refer to a system of declaring variables or functions of different types. The type of variable is what determines how much space is allotted in storage and how the bit pattern stored is interpreted.
+There are 4 types of types, and they are as follows:
+Basic Types, which include arithmetic types and are further classified into integer types and floating-point types.
+Enumerated types, which are also arithmetic types and are used to define variables that can only assign certain discrete integer values throughout the program.
+The Type Void, which simply indicates that there is no value.
+Derived Types, which include pointer types, array types, structure types, union types, and function types.
+
+<p>Integer Types
+The following table provides the details of standard integer types with their storage sizes and range of values:
+ 
+<p>Floating-Point Types
+The following table provide the details of standard floating-point types with storage sizes and value ranges and their precision:
+ 
+
+<p><p>Variables
+
+<p>A variable is nothing but a name given to a storage area that our programs can manipulate. Each variable in C has a specific type, which determines the size and layout of the variable's memory; the range of values that can be stored within that memory; and the set of operations that can be applied to the variable.
+The name of a variable can be composed of letters, digits, and the underscore character. It must begin with either a letter or an underscore. Upper and lowercase letters are distinct because C is case-sensitive. Based on the basic types explained in the previous chapter, there will be the following basic variable types:
+Char: Typically a single byte. This is an integer type.
+Int: The most natural size of integer for the machine.
+Float: A single-precision floating point value.
+Double: A double-precision floating point value.
+Void: Represents the absence of a type.
+
+<p>Variable Definition in C
+A variable definition tells the compiler where and how much storage to create for the variable. A variable definition specifies a data type and contains a list of one or more variables of that type as follows −
+type variable_list;
+Here, type must be a valid C data type including char, w_char, int, float, double, bool, or any user-defined object; and variable_list may consist of one or more identifier names separated by commas. Some valid declarations are shown here −
+int    i, j, k;
+char   c, ch;
+float  f, salary;
+double d;
+The line int i, j, k; declares and defines the variables i, j, and k; which instruct the compiler to create variables named i, j and k of type int.
+Variables can be initialized (assigned an initial value) in their declaration. The initializer consists of an equal sign followed by a constant expression as follows −
+type variable_name = value;
+Some examples are −
+extern int d = 3, f = 5;    // declaration of d and f. 
+int d = 3, f = 5;           // definition and initializing d and f. 
+byte z = 22;                // definition and initializes z. 
+char x = 'x';               // the variable x has the value 'x'.
+For definition without an initializer: variables with static storage duration are implicitly initialized with NULL (all bytes have the value 0); the initial value of all other variables are undefined.
+
+<p>Variable Declaration in C
+A variable declaration provides assurance to the compiler that there exists a variable with the given type and name so that the compiler can proceed for further compilation without requiring the complete detail about the variable. A variable definition has its meaning at the time of compilation only, the compiler needs actual variable definition at the time of linking the program.
+A variable declaration is useful when you are using multiple files and you define your variable in one of the files which will be available at the time of linking of the program. You will use the keyword extern to declare a variable at any place. Though you can declare a variable multiple times in your C program, it can be defined only once in a file, a function, or a block of code.
+Consider the following example program:
+#include <stdio.h>
+
+// Variable declaration:
+extern int a, b;
+extern int c;
+extern float f;
+
+int main () {
+
+   /* variable definition: */
+   int a, b;
+   int c;
+   float f;
+ 
+   /* actual initialization */
+   a = 10;
+   b = 20;
+  
+   c = a + b;
+   printf("value of c : %d \n", c);
+
+   f = 70.0/3.0;
+   printf("value of f : %f \n", f);
+ 
+   return 0;
+}
+<p>This program will produce the following result:
+value of c : 30
+value of f : 23.333334
+
+<p>The same concept applies on function declaration where you provide a function name at the time of its declaration and its actual definition can be given anywhere else. For example −
+// function declaration
+int func();
+
+int main() {
+
+   // function call
+   int i = func();
+}
+
+// function definition
+int func() {
+   return 0;
+}
+
+<p>Constants
+<p>Constants refer to fixed values that the program may not alter during its execution. These fixed values are also called literals.
+Constants can be of any of the basic data types like an integer constant, a floating constant, a character constant, or a string literal. There are enumeration constants as well.
+Constants are treated just like regular variables except that their values cannot be modified after their definition.
+
+<p>Character Constants
+Character literals are enclosed in single quotes, e.g., 'x' can be stored in a simple variable of char type.
+A character literal can be a plain character (e.g., 'x'), an escape sequence (e.g., '\t'), or a universal character (e.g., '\u02C0').
+There are certain characters in C that represent special meaning when preceded by a backslash for example, newline (\n) or tab (\t).
+Here is a list of such Escape sequences:
+\\ : \ character
+\' : ' character
+\" : " character
+\? : ? character
+\a : Alert or bell
+\b : Backspace
+\f : Form feed
+\n : Newline
+\r : Carriage return
+\t : Horizontal tab
+\v : Vertical tab
+\ooo : Octal number of one to three digits
+\xhh . . . : Hexadecimal number of one or more digits
+
+<p>Defining Constants
+There are two simple ways in C to define constants −
+The #define Preprocessor:
+
+<p>Given below is the form to use #define preprocessor to define a constant −
+#define identifier value
+The following example explains it in detail −
+#include <stdio.h>
+
+#define LENGTH 10   
+#define WIDTH  5
+#define NEWLINE '\n'
+
+int main() {
+   int area;  
+  
+   area = LENGTH * WIDTH;
+   printf("value of area : %d", area);
+   printf("%c", NEWLINE);
+
+   return 0;
+}
+<p>When the above code is compiled and executed, it produces the following result −
+value of area : 50
+
+<p>The const Keyword:
+You can use const prefix to declare constants with a specific type as follows −
+const type variable = value;
+The following example explains it in detail −
+#include <stdio.h>
+
+int main() {
+   const int  LENGTH = 10;
+   const int  WIDTH = 5;
+   const char NEWLINE = '\n';
+   int area;  
+   
+   area = LENGTH * WIDTH;
+   printf("value of area : %d", area);
+   printf("%c", NEWLINE);
+
+   return 0;
+}
+<p>When the above code is compiled and executed, it produces the following result −
+value of area : 50
 
 
-</body>
+<p>Operators
+
+<p>An operator is a symbol that tells the compiler to perform specific mathematical or logical functions. C language is rich in built-in operators and provides the following types of operators −
+
+<p>Arithmetic Operators
+<p>The following table shows all the arithmetic operators supported by the C language. Assume variable A holds 10 and variable B holds 20 then –
+ 
+<p>Relational Operators
+<p>The following table shows all the relational operators supported by C. Assume variable A holds 10 and variable B holds 20 then −
+ 
+<p>Logical Operators
+<p>Following table shows all the logical operators supported by C language. Assume variable A holds 1 and variable B holds 0, then –
+ 
+
+<p>Bitwise Operators
+<p>Bitwise operator works on bits and perform bit-by-bit operation. The following table lists the bitwise operators supported by C. Assume variable 'A' holds 60 and variable 'B' holds 13, then −
+ 
+<p>Assignment Operators
+<p>The following table lists the assignment operators supported by the C language –
+ 
+<p>Operators Precedence in C
+<p>Operator precedence determines the grouping of terms in an expression and decides how an expression is evaluated. Certain operators have higher precedence than others; for example, the multiplication operator has a higher precedence than the addition operator.
+For example, x = 7 + 3 * 2; here, x is assigned 13, not 20 because operator * has a higher precedence than +, so it first gets multiplied with 3*2 and then adds into 7.
+Here, operators with the highest precedence appear at the top of the table, those with the lowest appear at the bottom. Within an expression, higher precedence operators will be evaluated first.
+
+ 
+
+<p>(https://www.tutorialspoint.com/cprogramming/index.html)
+
+
+
+			</center></p>
+
+			
+			<p><a href = "https://moodle.stmartin.edu/">Link to Course Moodle Page</a>
+
+
+   </body>
 </html>
